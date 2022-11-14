@@ -20,14 +20,10 @@ public class E2_CircleMover : MonoBehaviour
          */
 
         // Your solution to Q2 here
-
+         
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            circle.transform.position = (Vector2) circle.transform.position + new Vector2(0.0f, 1.0f);
-            circle.transform.position = circle.transform.position + new Vector3(0.0f, 1.0f, 0.0f);
-
             circle.transform.position += (Vector3) new Vector2(0.0f, 1.0f);
-            circle.transform.position = circle.transform.position + (Vector3) new Vector2(0.0f, 1.0f);
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
