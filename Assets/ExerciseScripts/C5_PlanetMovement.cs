@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class E_BallNudge : MonoBehaviour
+public class C5_PlanetMovement : MonoBehaviour
 {
     [SerializeField] GameObject ball;
     [SerializeField] GameObject planet1;
@@ -64,22 +64,22 @@ public class E_BallNudge : MonoBehaviour
         /*
          *  Checkpoint 4a: When this method is invoked, a force of 10N should be applied to
          *  the ball in the direction normal to the closest planet.
+         *  
+         *  In other words, set `launchForce` to be of length 10 and have it be in
+         *  the direction normal to the planet.
          */
         Vector2 planetPosition = GetClosestPlanetPosition();
         Vector2 ballPosition = ballRb.position;
 
         const float launchForceMag = 10.0f;  // 10 Newtons
-        Vector2 launchForce = Vector2.zero;
 
-        /*
-         *  Your solution to Launch() here
-         */
+        Vector2 launchForce = Vector2.zero;  // edit this variable
+        // Your solution to Launch() here
 
         launchForce = (ballPosition - planetPosition).normalized * launchForceMag;
 
-        /*
-         *  End solution
-         */
+        // End solution
+
         ballRb.AddForce(launchForce, ForceMode2D.Impulse);
     }
 
@@ -90,7 +90,7 @@ public class E_BallNudge : MonoBehaviour
          *  the ball in the direction tangent to the closest planet.
          *  
          *  The ball should be boosted in the direction that the ball is moving in.
-         *  If the ball is stationary, boost "right".
+         *  If the ball is stationary, you can choose which way to boost.
          */
 
         Vector2 planetPosition = GetClosestPlanetPosition();
@@ -99,7 +99,6 @@ public class E_BallNudge : MonoBehaviour
         Vector2 ballVelocity = ballRb.velocity;
 
         const float boostForceMag = 4.0f;  // 4 Newtons
-        Vector2 boostForce = Vector2.zero;
 
         Quaternion rotCW = Quaternion.Euler(0.0f, 0.0f, -90.0f);
         Quaternion rotCCW = Quaternion.Euler(0.0f, 0.0f, 90.0f);
@@ -108,10 +107,9 @@ public class E_BallNudge : MonoBehaviour
         // Vector2 vecRotCW = rotCW * vec;   // rotate `vec` 90 deg clockwise
         // Vector2 vecRotCCW = rotCCW * vec; // rotate `vec` 90 deg counter-clockwise
 
-        /*
-         * Your solution to Boost() here
-         */
-        // some code
+        Vector2 boostForce = Vector2.zero;
+        // Your solution to Boost() here
+
         Vector2 referenceVec = ballPosition - planetPosition;
         referenceVec = rotCW * referenceVec;
 
@@ -124,9 +122,7 @@ public class E_BallNudge : MonoBehaviour
             boostForce = -referenceVec.normalized * boostForceMag;
         }
 
-        /*
-         * End solution
-         */
+        // End solution
 
         ballRb.AddForce(boostForce, ForceMode2D.Impulse);
     }

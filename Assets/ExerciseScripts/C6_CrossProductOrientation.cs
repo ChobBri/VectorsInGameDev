@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public class E_CrossProduct : MonoBehaviour
+public class C6_CrossProductOrientation : MonoBehaviour
 {
     [SerializeField] GameObject cylinder;
     [SerializeField] Transform bottom;
@@ -23,56 +23,39 @@ public class E_CrossProduct : MonoBehaviour
     void Update()
     {
         /**
-         * Question 3:
-         * - set `isBehindCylinder` to true if the camera is behind the cylinder,
-         *   otherwise, set `isBehindCylinder` to false (is infront of cylinder).
-         *   
-         *   'behind behind the cylinder' is defined as such:
-         *   Imagine a (mathematical) plane that cuts through the cylinder into its front half and back half.
-         *   Then, you are behind the cylinder when you are on the back-half side of the plane.
-         *   
-         * [Bonus]
-         * - Same thing as the first question, but `isBehindCylinder` is true when
-         *   the camera is inside a cone where the sides and the base-normal vector is 45 degs apart
-         *   Note: cos(45) = sqrt(2)/2 = 0.707
-         * 
+         * Checkpoint 6:
+         * - compute the forward vector of the cylinder.
+         *   The forward vector should be parallel to both the surface and the plane spanned by the normal vector and look direction
          */
-        if(!Input.GetMouseButton(1))MovementControls();
+        if(!Input.GetMouseButton(1)) MovementControls();
         Vector3 cylinderDirection = cylinder.transform.rotation * Vector3.forward;
-        Vector3 cameraDirection = camera.transform.rotation * Vector3.forward;
+        Vector3 camDir = camera.transform.rotation * Vector3.forward;
         Vector3 camToCylinder = cylinder.transform.position - camera.transform.position;
-        Debug.DrawLine(camera.transform.position, camera.transform.position + cameraDirection);
+        Debug.DrawLine(camera.transform.position, camera.transform.position + camDir);
         bool isBehindCylinder = false;
 
-        // Your solution to Q4 here
 
         if (isGrabbing)
         {
             RaycastHit hit;
             const float range = 1.25f;
-            if (Physics.Raycast(camera.transform.position, cameraDirection, out hit, range))
+            if (Physics.Raycast(camera.transform.position, camDir, out hit, range))
             {
-                //cylinder.transform.position = hit.point;
-
                 float halfLength = (cylinder.transform.position - bottom.position).magnitude;
-                cylinder.transform.position = hit.point + hit.normal.normalized * halfLength;
+                cylinder.transform.position = hit.point + hit.normal * halfLength;
+
                 Vector3 normal = hit.normal;
-                Debug.DrawLine(hit.point, hit.point + normal);
+                Vector3 cameraDirection = camDir;
+                Vector3 forward = camera.transform.rotation * Vector3.forward;  // edit this variable
+                // Your solution to C6 here
+
                 Vector3 sideVec = Vector3.Cross(cameraDirection, normal);
-                Debug.DrawLine(hit.point, hit.point + sideVec);
+                forward = Vector3.Cross(normal, sideVec);
 
-
-
-                Vector3 forward = Vector3.Cross(normal, sideVec);
-
-                Debug.DrawLine(hit.point, hit.point + forward);
-                Vector3 tan = forward;
-                Vector3 bitan = sideVec;
-                Vector3 refnorm = hit.normal;
-                Vector3.OrthoNormalize(ref refnorm, ref tan, ref bitan);
-                //Debug.DrawLine(hit.point, hit.point + forward);
+                // End C6 solution
 
                 cylinder.transform.rotation = Quaternion.LookRotation(forward, normal);
+
                 if (Input.GetMouseButtonDown(0))
                 {
                     isGrabbing = false;
@@ -82,7 +65,7 @@ public class E_CrossProduct : MonoBehaviour
             else
             {
                 cylinder.transform.rotation = camera.transform.rotation;
-                cylinder.transform.position = camera.transform.position + cameraDirection.normalized * range;
+                cylinder.transform.position = camera.transform.position + camDir.normalized * range;
             }
         } 
         else

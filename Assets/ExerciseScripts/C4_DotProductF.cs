@@ -6,10 +6,12 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public class E_DotProduct : MonoBehaviour
+public class C4_DotProductF : MonoBehaviour
 {
-    [SerializeField] GameObject cylinder;
+    [SerializeField] GameObject f;
     [SerializeField] new Camera camera;
+    [SerializeField] GameObject uiText;
+    float globalRadius = 0.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,34 +22,34 @@ public class E_DotProduct : MonoBehaviour
     void Update()
     {
         /**
-         * Question 3:
-         * - set `isBehindCylinder` to true if the camera is behind the cylinder,
-         *   otherwise, set `isBehindCylinder` to false (is infront of cylinder).
+         * Checkpoint 5:
+         * - set `canPayRespect` to true if:
+         *     the player is 'looking near' the text 'F' and
+         *     the player and the text is `radius` units apart.
          *   
-         *   'behind behind the cylinder' is defined as such:
-         *   Imagine a (mathematical) plane that cuts through the cylinder into its front half and back half.
-         *   Then, you are behind the cylinder when you are on the back-half side of the plane.
-         *   
-         * [Bonus]
-         * - Same thing as the first question, but `isBehindCylinder` is true when
-         *   the camera is inside a cone where the sides and the base-normal vector is 45 degs apart
-         *   Note: cos(45) = sqrt(2)/2 = 0.707
+         * A player is 'looking near' something if the looking direction and the direction of where
+         * the text is is less than 15 degrees apart.
          * 
+         * You may assume: cos(15) = 0.966
          */
         MovementControls();
-        Vector3 cylinderDirection = cylinder.transform.rotation * Vector3.forward;
+        f.transform.rotation = Quaternion.LookRotation(camera.transform.position - f.transform.position);
+
         Vector3 cameraDirection = camera.transform.rotation * Vector3.forward;
-        Vector3 camToCylinder = cylinder.transform.position - camera.transform.position;
+        Vector3 camToF = f.transform.position - camera.transform.position;
 
-        bool isBehindCylinder = false;
+        const float radius = 0.7f;
+        bool canPayRespect = false; // edit this variable
+        // Your solution to Q5 here
 
-        // Your solution to Q4 here
+        canPayRespect = Vector3.Dot(cameraDirection, camToF.normalized) > 0.966f && camToF.magnitude < radius;
+        //canPayRespect = Vector3.Dot(cameraDirection, camToF.normalized) > 0.966f && camToF.magnitude < radius;
 
-        isBehindCylinder = Vector3.Dot(cylinderDirection, camToCylinder.normalized) > 0.707 && camToCylinder.sqrMagnitude < 0.5f * 0.5f;
+        // End Q5 solution
 
-        // End Q4 solution
-
-        cylinder.GetComponent<MeshRenderer>().material.color = isBehindCylinder ? Color.green : Color.red;
+        uiText.SetActive(canPayRespect);
+        if (canPayRespect && Input.GetKeyDown(KeyCode.F)) Debug.Log("Paid respects");
+        globalRadius = radius;
     }
 
     void MovementControls()
@@ -100,7 +102,7 @@ public class E_DotProduct : MonoBehaviour
 
         camera.transform.Rotate(Vector3.up, 5.0f * Input.GetAxis("Mouse X"), Space.World);
         camera.transform.Rotate(Vector3.right, -5.0f * Input.GetAxis("Mouse Y"), Space.Self);
-
+         
         Vector3 eAng = camera.transform.rotation.eulerAngles;
         eAng.z = 0.0f;
         if (eAng.x > 180.0f)
@@ -112,8 +114,6 @@ public class E_DotProduct : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Handles.color = Color.green;
-        Handles.DrawAAPolyLine(cylinder.transform.position, cylinder.transform.position + cylinder.transform.rotation * Vector3.forward * 5.0f);
-        Gizmos.DrawWireSphere(cylinder.transform.position, 0.5f);
+        Gizmos.DrawWireSphere(f.transform.position, globalRadius);
     }
 }
