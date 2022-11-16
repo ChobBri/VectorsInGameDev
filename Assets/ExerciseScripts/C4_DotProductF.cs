@@ -43,7 +43,6 @@ public class C4_DotProductF : MonoBehaviour
         // Your solution to Q5 here
 
         canPayRespect = Vector3.Dot(cameraDirection, camToF.normalized) > 0.966f && camToF.magnitude < radius;
-        //canPayRespect = Vector3.Dot(cameraDirection, camToF.normalized) > 0.966f && camToF.magnitude < radius;
 
         // End Q5 solution
 

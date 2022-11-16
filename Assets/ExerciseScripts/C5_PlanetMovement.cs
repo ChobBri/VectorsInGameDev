@@ -91,6 +91,8 @@ public class C5_PlanetMovement : MonoBehaviour
          *  
          *  The ball should be boosted in the direction that the ball is moving in.
          *  If the ball is stationary, you can choose which way to boost.
+         *  
+         *  You should set `boostForce` to be of length 4 and in the appropriate tangent direction
          */
 
         Vector2 planetPosition = GetClosestPlanetPosition();
