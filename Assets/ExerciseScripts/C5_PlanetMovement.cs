@@ -62,7 +62,7 @@ public class C5_PlanetMovement : MonoBehaviour
     private void Launch()
     {
         /*
-         *  Checkpoint 4a: When this method is invoked, a force of 10N should be applied to
+         *  Checkpoint 5a: When this method is invoked, a force of 10N should be applied to
          *  the ball in the direction normal to the closest planet.
          *  
          *  In other words, set `launchForce` to be of length 10 and have it be in
@@ -85,7 +85,7 @@ public class C5_PlanetMovement : MonoBehaviour
     private void Boost()
     {
         /*
-         *  Checkpoint 4b: When this method is invoked, a force of 4N should be applied to
+         *  Checkpoint 5b: When this method is invoked, a force of 4N should be applied to
          *  the ball in the direction tangent to the closest planet.
          *  
          *  The ball should be boosted in the direction that the ball is moving in.
