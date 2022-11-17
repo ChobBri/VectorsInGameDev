@@ -88,7 +88,7 @@ public class C5_PlanetMovement : MonoBehaviour
          *  Checkpoint 5b: When this method is invoked, a force of 4N should be applied to
          *  the ball in the direction tangent to the closest planet.
          *  
-         *  The ball should be boosted in the direction that the ball is moving in.
+         *  The ball should be boosted in the tangent direction that the ball is moving in.
          *  If the ball is stationary, you can choose which way to boost.
          *  
          *  You should set `boostForce` to be of length 4 and in the appropriate tangent direction
