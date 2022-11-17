@@ -22,7 +22,7 @@ public class C4_DotProductF : MonoBehaviour
     void Update()
     {
         /**
-         * Checkpoint 5:
+         * Checkpoint 4:
          * - set `canPayRespect` to true if:
          *     the player is 'looking near' the text 'F' and
          *     the player and the text is `radius` units apart.
@@ -40,10 +40,10 @@ public class C4_DotProductF : MonoBehaviour
 
         const float radius = 0.7f;
         bool canPayRespect = false; // edit this variable
-        // Your solution to Q5 here
+        // Your solution to Q4 here
 
 
-        // End Q5 solution
+        // End Q4 solution
 
         uiText.SetActive(canPayRespect);
         if (canPayRespect && Input.GetKeyDown(KeyCode.F)) Debug.Log("Paid respects");
