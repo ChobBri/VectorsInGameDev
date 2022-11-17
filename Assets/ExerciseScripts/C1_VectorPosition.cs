@@ -19,9 +19,7 @@ public class C1_VectorPosition : MonoBehaviour
 
         // Solution to C1 here
 
-        square.transform.position = new Vector2(2.0f, 1.0f);
-        circle.transform.position = new Vector2(-4.0f, 3.0f);
-        hexagon.transform.position = new Vector2(8.5f, -7.5f);
+
 
         // End C1 solution
 

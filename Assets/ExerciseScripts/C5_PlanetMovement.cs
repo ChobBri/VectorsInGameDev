@@ -76,7 +76,6 @@ public class C5_PlanetMovement : MonoBehaviour
         Vector2 launchForce = Vector2.zero;  // edit this variable
         // Your solution to Launch() here
 
-        launchForce = (ballPosition - planetPosition).normalized * launchForceMag;
 
         // End solution
 
@@ -112,17 +111,6 @@ public class C5_PlanetMovement : MonoBehaviour
         Vector2 boostForce = Vector2.zero;
         // Your solution to Boost() here
 
-        Vector2 referenceVec = ballPosition - planetPosition;
-        referenceVec = rotCW * referenceVec;
-
-        if (Vector2.Dot(referenceVec, ballVelocity) >= 0.0f)
-        {
-            boostForce = referenceVec.normalized * boostForceMag;
-        }
-        else
-        {
-            boostForce = -referenceVec.normalized * boostForceMag;
-        }
 
         // End solution
 

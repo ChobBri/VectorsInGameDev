@@ -49,8 +49,7 @@ public class C6_CrossProductOrientation : MonoBehaviour
                 Vector3 forward = camera.transform.rotation * Vector3.forward;  // edit this variable
                 // Your solution to C6 here
 
-                Vector3 sideVec = Vector3.Cross(cameraDirection, normal);
-                forward = Vector3.Cross(normal, sideVec);
+
 
                 // End C6 solution
 

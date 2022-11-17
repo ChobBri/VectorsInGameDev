@@ -24,23 +24,23 @@ public class C2_GridMovement : MonoBehaviour
          
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            position += new Vector2(0.0f, 1.0f);
+
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            position += new Vector2(0.0f, -1.0f);
+
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            position += Vector2.right;
+
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            position += Vector2.left;
+
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            position = Vector2.zero;
+
         }
 
         // End C2 solution

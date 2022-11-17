@@ -24,9 +24,7 @@ public class C3_ContinuousMovement : MonoBehaviour
         Vector2 acceleration = Vector2.zero;  // edit this variable
         // Your C3 solution here
 
-        acceleration = (mousePos - circlePosition).normalized * accMag;
-        velocity += acceleration * Time.deltaTime;
-        circlePosition += velocity * Time.deltaTime;
+
 
         // End C3 solution
 
